@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import MapDashboard from './Component'
 
 /** Provider is a react-redux component **/ 

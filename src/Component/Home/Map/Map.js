@@ -1,25 +1,39 @@
 
 import React from 'react';
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
+import './style.css';
 
 export class GMap extends React.Component {
 
-    constructor(){
-        super();
-        this.state = {
-            selectedPlace: {
-                name: "chandigarh"
-            }
-        }
-    }
+    render() {        
+        /** Markers **/ 
+        let markersData =  this.props.markersLocations;
+        /** Map data to handle multiple markeres with location name **/ 
+        let markers = markersData.map((marker, index) => {
+            
+            return <Marker key={index}
+                        title={((marker || {}).place || {}).formatted_address}
+                        name={((marker || {}).place || {}).formatted_address}
+                        position={{lat: (marker || {}).lat, lng: (marker || {}).long}} />
+        })        
 
-    render(){
+
         return (
-            <Map google={this.props.google} zoom={14}>
-                <Marker onClick={this.onMarkerClick} name={'current-locaiotn'} />
-                <InfoWindow onClose = {this.onInfoWindowClose}>
+            <Map 
+                className='mapWrapperStyle'
+                google={this.props.google} 
+                zoom={14}  
+                center={{ 
+                    lat: ((markersData.length && markersData[markersData.length-1]) || {}).lat || 37, 
+                    lng: ((markersData.length && markersData[markersData.length-1]) || {}).long || -122.405640 
+                }}
+                scrollwheel={true}
+                >
+                {markers}
+
+                <InfoWindow onClose={this.onInfoWindowClose}>
                     <div>
-                        <h1>{this.state.selectedPlace.name}</h1>
+                        <h1>{'Chandigarh'}</h1>
                     </div>
                 </InfoWindow>
             </Map>
@@ -27,7 +41,4 @@ export class GMap extends React.Component {
     }
 }
 
-GoogleApiWrapper({
-    apiKey: 'AIzaSyBIENN3PQIH8VO3x1vBEl7TG9Tmtuq88CM'
-})(GMap);
-export default GMap;
+export default GoogleApiWrapper({})(GMap);

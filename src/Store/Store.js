@@ -2,7 +2,7 @@
 /** Create a store here for holding the react state **/ 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '../Reducer/First';
+import rootReducer from '../Reducer/ActionResponseSelector';
 
 const initialState = {};
 const middleware = [thunk];

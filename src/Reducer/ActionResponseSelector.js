@@ -1,4 +1,4 @@
-import { FETCH_POST, NEW_POST } from '../Actions/Types';
+import { FETCH_POST, LOC_AREA } from '../Actions/Types';
 
 let initialState = {
     items: [],
@@ -7,16 +7,19 @@ let initialState = {
 
 /** Set state here **/ 
 export default (state = initialState, action)=>{
+    
     switch(action.type){
         case FETCH_POST : 
-        console.log('Reducer called: ', state, action.body);
                 return {
                     ...state,
                     items: action.body
                 }
-            break;
-        case NEW_POST :
-            break;
+        case LOC_AREA : 
+        console.log('Local area type: ',state);           
+             return {
+                 ...state,
+                 activeAddress: action.body
+             }
         default:
             return state    
     }
