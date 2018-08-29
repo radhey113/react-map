@@ -17,7 +17,16 @@ class MapDashboard extends React.Component {
            allAddress: [{
             place:"Chandigarh",
             country: "india"
-          }],
+          },
+          {
+            place:"Punjab",
+            country: "india"
+          },
+          {
+            place:"Maharashtra",
+            country: "india"
+          }
+        ],
            searchValue: ''
         }
         
