@@ -8,6 +8,7 @@ export class GMap extends React.Component {
     render() {        
         /** Markers **/ 
         let markersData =  this.props.markersLocations;
+
         /** Map data to handle multiple markeres with location name **/ 
         let markers = markersData.map((marker, index) => {
             
@@ -33,7 +34,6 @@ export class GMap extends React.Component {
 
                 <InfoWindow onClose={this.onInfoWindowClose}>
                     <div>
-                        <h1>{'Chandigarh'}</h1>
                     </div>
                 </InfoWindow>
             </Map>
