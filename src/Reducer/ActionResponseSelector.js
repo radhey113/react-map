@@ -1,8 +1,9 @@
 import { FETCH_POST, LOC_AREA } from '../Actions/Types';
 
 let initialState = {
-    items: [],
-    itme: {}
+    activeAddress: '',
+    allAddress: [],
+    searchValue: ''
 }
 
 /** Set state here **/ 
@@ -14,8 +15,7 @@ export default (state = initialState, action)=>{
                     ...state,
                     items: action.body
                 }
-        case LOC_AREA : 
-        console.log('Local area type: ',state);           
+        case LOC_AREA :           
              return {
                  ...state,
                  activeAddress: action.body

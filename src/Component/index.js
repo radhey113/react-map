@@ -10,26 +10,18 @@ import './style.css';
 class MapDashboard extends React.Component {
 
     constructor(props){
+
+        /** Pass props to base class **/ 
         super(props);
 
+        /** Current state **/ 
         this.state = {
            activeAddress: '',
-           allAddress: [{
-            place:"Chandigarh",
-            country: "india"
-          },
-          {
-            place:"Punjab",
-            country: "india"
-          },
-          {
-            place:"Maharashtra",
-            country: "india"
-          }
-        ],
+           allAddress: [],
            searchValue: ''
         }
         
+        /** bind events with class local refference **/ 
         this.changeAddress = this.changeAddress.bind(this);
         this.submit = this.submit.bind(this);
         this.deleteLocation = this.deleteLocation.bind(this);
@@ -44,7 +36,6 @@ class MapDashboard extends React.Component {
 
     /** Change address or location**/ 
     changeAddress(ele){
-        
         this.setState({
             searchValue: ele.target.value
         });
@@ -52,18 +43,31 @@ class MapDashboard extends React.Component {
         this.props.getLocation(newElement);  
     }
 
+
+    /** component will receive props event receive props when they changed **/
+    componentWillReceiveProps(props){
+        
+        let allAddress = this.state.allAddress;
+        let index = allAddress.findIndex(location => location.place.formatted_address === props.activeAddress.place.formatted_address);
+
+        /** check duplicacy **/ 
+        if(index < 0){
+            this.setState({
+                searchValue: '',
+                activeAddress: '',
+                allAddress: [...this.state.allAddress, props.activeAddress],
+                duplicateLocation: false
+            });    
+        }
+    }
+
     /** Submit location to state **/ 
     async submit(e){
-        e.preventDefault();
-        this.setState({
-            searchValue: '',
-            activeAddress: '',
-            allAddress: [...this.state.allAddress, this.props.activeAddress]
-        });    
+        e.preventDefault(); 
     }
 
     render(){
-
+    
         return (
             <div>
                 <div className="mapStyle">
@@ -79,6 +83,7 @@ class MapDashboard extends React.Component {
                         eRef={this.myRef}
                         submit={this.submit}    
                         />
+
                 </div>
                 <div>
                     <ListOfLocations locationList={this.state.allAddress} removeLocation={(index)=> this.deleteLocation(index)} />

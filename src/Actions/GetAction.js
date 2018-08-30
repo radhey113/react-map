@@ -28,7 +28,6 @@ export const getLocation = address => dispatch => {
         let data = {};
         if((place.geometry || {}).location){
             data = {
-                get: true,
                 place: place,
                 lat: place.geometry.location.lat(),
                 long: place.geometry.location.lng()

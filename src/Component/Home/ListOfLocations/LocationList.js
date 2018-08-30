@@ -7,16 +7,14 @@ import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
 
 const ListOfLocations = (props) => {
   
-  console.log(props.locationLis);
   let listOfLocatoin = props.locationList.map((location, index) => {
-      
-      return <ListItem key={index}>
+      return location ? <ListItem key={index}>
                   <Avatar>
                     {index+1}
                   </Avatar>
-                  <ListItemText primary={location.place} secondary={location.country} />
+                  <ListItemText primary={location.place.formatted_address} secondary={location.name} />
                    <DeleteForeverTwoToneIcon className="deleteIconStyle" onClick={() => props.removeLocation(index)} />
-              </ListItem>
+              </ListItem> : '';
   })
 
   let title = listOfLocatoin.length ?

@@ -1,11 +1,11 @@
 .mapStyle{
    width: 100vh;
-   max-height: 75vh;
-   min-height: 80vh;
+   max-height: 55vh;
+   min-height: 60vh;
 }
 
 .mapStyle > *, .mapStyle div { 
-    max-height: 75vh !important;
+    max-height: 55vh !important;
 }
 /* .mapStyle div{
     max-height: 75vh;
